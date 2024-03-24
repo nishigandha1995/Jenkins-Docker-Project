@@ -1,14 +1,7 @@
 FROM centos:latest
 MAINTAINER nishigandhakutemate1@gmail.com
 
-# Set up CentOS repository URLs with reliable mirrors
-RUN echo -e "[base]\nname=CentOS-8 - Base\nbaseurl=http://mirror.centos.org/centos/8/BaseOS/x86_64/os/\ngpgcheck=1\ngpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-8" > /etc/yum.repos.d/CentOS-Base.repo \
-    && echo -e "[appstream]\nname=CentOS-8 - AppStream\nbaseurl=http://centos.mirror.constant.com/8/AppStream/x86_64/os/\ngpgcheck=1\ngpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-8" > /etc/yum.repos.d/CentOS-AppStream.repo
-
-# Clean yum cache to avoid any issues
-RUN yum clean all
-
-# Install required packages
+# Install Apache HTTP Server, zip, and unzip directly from CentOS repositories
 RUN yum install -y httpd zip unzip
 
 # Add website content
