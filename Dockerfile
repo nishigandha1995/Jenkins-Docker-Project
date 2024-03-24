@@ -1,8 +1,10 @@
-FROM centos:latest
+FROM centos:8
 MAINTAINER nishigandhakutemate1@gmail.com
 
-# Install required packages
-RUN yum install -y httpd zip unzip
+# Update repository metadata and install required packages
+RUN yum clean all && \
+    yum makecache && \
+    yum install -y httpd zip unzip
 
 # Add website content
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
@@ -14,6 +16,7 @@ RUN rm -rf photogenic photogenic.zip
 # Start Apache HTTP server
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
+
 
  
 # FROM  centos:8
