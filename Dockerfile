@@ -1,16 +1,18 @@
-FROM centos:latest
-MAINTAINER nishigandhakutemate1@gmail.com
+FROM nginx:latest
 
-# Install Apache HTTP Server, zip, and unzip directly from CentOS repositories
-RUN yum install -y httpd zip unzip
+# Remove the default Nginx configuration file
+RUN rm -rf /etc/nginx/conf.d/*
 
-# Add website content
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
-WORKDIR /var/www/html/
-RUN unzip photogenic.zip
-RUN cp -rvf photogenic/* .
-RUN rm -rf photogenic photogenic.zip
+# Copy custom Nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Start Apache HTTP server
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+# Copy HTML files to Nginx HTML directory
+COPY index.html /usr/share/nginx/html/
+COPY style.css /usr/share/nginx/html/
+
+# Expose port 80
 EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
+
