@@ -5,6 +5,9 @@ MAINTAINER nishigandhakutemate1@gmail.com
 RUN echo -e "[base]\nname=CentOS-8 - Base\nbaseurl=http://mirror.centos.org/centos/8/BaseOS/x86_64/os/\ngpgcheck=1\ngpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-8" > /etc/yum.repos.d/CentOS-Base.repo \
     && echo -e "[appstream]\nname=CentOS-8 - AppStream\nbaseurl=http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=AppStream\ngpgcheck=1\ngpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-8" > /etc/yum.repos.d/CentOS-AppStream.repo
 
+# Clean yum cache to avoid any issues
+RUN yum clean all
+
 # Install required packages
 RUN yum install -y httpd zip unzip
 
