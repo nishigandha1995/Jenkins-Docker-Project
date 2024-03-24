@@ -1,4 +1,4 @@
-FROM alpine
+FROM centos:latest
 MAINTAINER nishigandhakutemate1@gmail.com
 
 # Install required packages
