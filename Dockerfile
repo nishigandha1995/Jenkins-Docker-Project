@@ -1,24 +1,13 @@
 FROM nginx:latest
-LABEL maintainer="vikashashoke@gmail.com"
-
-# Install unzip
-RUN apt-get update && apt-get install -y unzip
 
 # Set working directory
 WORKDIR /usr/share/nginx/html
 
-# Add the URL of the website template ZIP file here
-ARG WEBSITE_TEMPLATE_URL="https://www.free-css.com/assets/files/free-css-templates/download/page251/excel.zip"
-
-# Download and extract the website template
-RUN wget -O template.zip $WEBSITE_TEMPLATE_URL \
-    && unzip template.zip \
-    && rm template.zip
+# Add a simple HTML file
+RUN echo "<!DOCTYPE html><html><head><title>Welcome</title></head><body><h1>Hello, World!</h1></body></html>" > index.html
 
 # Expose port 80
 EXPOSE 80
 
 # Command to run nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
-
-
