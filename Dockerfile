@@ -1,12 +1,20 @@
-# Use the official NGINX image as the base image
-FROM nginx:latest
+# Use the official Python image as the base image
+FROM python:3.9
 
-# Expose port 80
-EXPOSE 80
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy custom configuration file to NGINX configuration directory
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy the Python dependencies file to the container
+COPY requirements.txt .
 
-# CMD instruction to start NGINX server in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Install the Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the Flask application code to the container
+COPY app.py .
+
+# Expose the port the Flask application will run on
+EXPOSE 3000
+
+# Command to run the Flask application when the container starts
+CMD ["python", "app.py"]
