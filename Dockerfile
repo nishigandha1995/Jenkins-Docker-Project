@@ -1,5 +1,5 @@
 FROM nginx:latest
-LABEL maintainer="nishigandhakutemate1@gmail.com"
+LABEL maintainer="vikashashoke@gmail.com"
 
 # Install unzip
 RUN apt-get update && \
@@ -7,12 +7,13 @@ RUN apt-get update && \
 
 # Download and extract the website template
 WORKDIR /usr/share/nginx/html
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page261/stride.zip /usr/share/nginx/html/
-RUN unzip stride.zip && \
-    rm stride.zip
+ADD https://example.com/template.zip /usr/share/nginx/html/
+RUN unzip template.zip && \
+    rm template.zip
 
 # Expose port 80
 EXPOSE 80
 
 # Command to start nginx
 CMD ["nginx", "-g", "daemon off;"]
+
