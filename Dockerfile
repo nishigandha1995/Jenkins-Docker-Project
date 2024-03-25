@@ -1,18 +1,18 @@
-FROM centos:latest
-MAINTAINER nishigandhakutemate1@gmail.com
+FROM nginx:latest
+LABEL maintainer="nishigandhakutemate1@gmail.com"
 
-# Install Apache, unzip, and other necessary packages
-RUN yum install -y httpd \
-    zip \
-    unzip
+# Install unzip
+RUN apt-get update && \
+    apt-get install -y unzip
 
 # Download and extract the website template
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
-WORKDIR /var/www/html/
-RUN unzip photogenic.zip && \
-    mv photogenic/* . && \
-    rm -rf photogenic photogenic.zip
+WORKDIR /usr/share/nginx/html
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page261/stride.zip /usr/share/nginx/html/
+RUN unzip stride.zip && \
+    rm stride.zip
 
-# Start Apache server
-CMD ["httpd", "-D", "FOREGROUND"]
+# Expose port 80
 EXPOSE 80
+
+# Command to start nginx
+CMD ["nginx", "-g", "daemon off;"]
