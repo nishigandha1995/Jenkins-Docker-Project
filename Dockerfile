@@ -11,8 +11,7 @@ WORKDIR /usr/share/nginx/html
 ARG WEBSITE_TEMPLATE_URL="https://www.free-css.com/assets/files/free-css-templates/download/page251/excel.zip"
 
 # Download and extract the website template
-RUN apt-get update && apt-get install -y wget \
-    && wget -O template.zip $WEBSITE_TEMPLATE_URL \
+RUN wget -O template.zip $WEBSITE_TEMPLATE_URL \
     && unzip template.zip \
     && rm template.zip
 
@@ -21,4 +20,5 @@ EXPOSE 80
 
 # Command to run nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
+
 
