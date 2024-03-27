@@ -1,20 +1,10 @@
-# Use the official Python image as the base image
-FROM python:3.9
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the Python dependencies file to the container
-COPY requirements.txt .
-
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the Flask application code to the container
-COPY app.py .
-
-# Expose the port the Flask application will run on
-EXPOSE 3000
-
-# Command to run the Flask application when the container starts
-CMD ["python", "app.py"]
+# Pull tomcat latest image from dockerhub
+FROM tomcat:8.0.51-jre11-alpine
+MAINTAINER nishigandha1995@gmail.com
+# copy war file on to container
+COPY ./target/Jenkins-Docker-Project
+*.war /usr/local/tomcat/webapps
+EXPOSE  8080 80
+USER Jenkins-Docker-Project
+WORKDIR /usr/local/tomcat/webapps
+CMD ["catalina.sh","run"]
