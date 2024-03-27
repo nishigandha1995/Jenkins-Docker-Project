@@ -1,9 +1,6 @@
 pipeline {
-          agent any
-    stage('git checkout') {
-        git 'https://github.com/nishigandha1995/Jenkins-Docker-Project.git'  
+         agent any
     }
-    
      stage('docker build image') {
         sh "docker image build -t ${JOB_NAME}:v1.${BUILD_ID} ."
         sh "docker image tag ${JOB_NAME}:v1.${BUILD_ID} nishi11/${JOB_NAME}:v1.${BUILD_ID}"
