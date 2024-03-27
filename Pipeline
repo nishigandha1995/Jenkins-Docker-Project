@@ -17,12 +17,15 @@ node {
             sh "docker image push nishi11/${JOB_NAME}:latest"
             sh "docker image rm ${JOB_NAME}:v1.${BUILD_ID} nishi11/${JOB_NAME}:v1.${BUILD_ID} nishi11/${JOB_NAME}:latest"
         }
+    }
         
-    stage('docker container deployment'){
+    stage('docker container deployment') {
+        def docker_rm_container = 'docker rm -f cont || true'
         def docker_run = 'docker run -itd --name cont -p 9008:80 nishi11/docker-groovy-webapplication'
+        
         sshagent(['webapp']) {
-         sh "ssh -v -o StrictHostKeyChecking=no ubuntu@10.0.1.236 ${docker_run}"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@10.0.1.236 '${docker_rm_container}'"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@10.0.1.236 '${docker_run}'"
         }
-      }    
     }
 }
