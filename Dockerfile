@@ -5,7 +5,7 @@ RUN rm -rf /etc/nginx/conf.d/*
 
 # Copy custom Nginx configuration file and set permissions
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN chmod 644 /etc/nginx/nginx.conf
+RUN chmod 777 /etc/nginx/nginx.conf
 
 # Copy HTML files to Nginx HTML directory and set permissions
 COPY index.html /usr/share/nginx/html/
