@@ -21,7 +21,7 @@ node {
         
     stage('docker container deployment') {
         def docker_rm_container = 'docker rm -f cont || true'
-        def docker_run = 'docker run -itd --name cont -p 9000:80 nishi11/docker-groovy-webapplication'
+        def docker_run = 'docker run -itd --name cont -p 9008:80 nishi11/docker-groovy-webapplication'
         
         sshagent(['webapp']) {
             sh "ssh -o StrictHostKeyChecking=no ubuntu@10.0.1.236 '${docker_rm_container}'"
