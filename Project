@@ -1,0 +1,15 @@
+1. Get an application of your choice, and push the code on GitHub.
+
+2. Containerize the application.
+
+3. Set up the secure infrastructure for the app on AWS using Terraform, and host the app on that infrastructure. Create a separate repo for Terraform Code on GitHub.
+
+4. Create a CI/CD pipeline for the app. (Don't use the tools you already know)
+
+5. It should build and deploy the code on push.
+
+6. Changes should be visible on the public URL.
+
+7. Set up basic monitoring and logging for the deployed application.
+
+8. Document the assignment and share your learning.
